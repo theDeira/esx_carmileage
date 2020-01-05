@@ -8,11 +8,17 @@ AddEventHandler('esx_carmileage:addMileage', function(vehPlate, km)
     local identifier = ESX.GetPlayerFromId(src).identifier
 	local plate = vehPlate
 	local newKM = km
-	-- print("guardando los km en bbdd")
-	-- print(newkm)
-	-- print(plate)
-
-    MySQL.Async.execute('UPDATE veh_km SET km = @kms WHERE carplate = @plate', {['@plate'] = plate, ['@kms'] = newKM})
+		
+	MySQL.Async.fetchAll('SELECT * FROM owned_vehicles WHERE plate=@plate ', {
+        ['@plate'] = plate
+    }, function(result)
+		if result then
+		    MySQL.Async.execute('UPDATE veh_km SET km = @kms WHERE carplate = @plate', {['@plate'] = plate, ['@kms'] = newKM})
+			--RconPrint('true')
+		else
+		
+		end
+    end)
 end)
 
 ESX.RegisterServerCallback('esx_carmileage:getMileage', function(source, cb, plate)
