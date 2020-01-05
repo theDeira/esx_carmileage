@@ -1,6 +1,6 @@
 # esx_carmileage
-[EN]
+#[EN]
 This script only allows people to have mileage on their own cars, now stolen cars.
 
-[TR]
+#[TR]
 Bu script sayesinde aracınızın kat ettiği toplam mesafeyi kilometre cinsinden kaydeder.
